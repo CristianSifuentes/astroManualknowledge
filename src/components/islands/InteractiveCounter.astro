@@ -1,0 +1,15 @@
+<section class="island-card" data-island="counter">
+  <h3>Island 1 — Immediate interaction (client:load mindset)</h3>
+  <p>This island is hydrated immediately because the interaction is primary.</p>
+  <p>Clicks: <strong data-count>0</strong></p>
+  <button type="button" data-increment>Increment</button>
+</section>
+
+<script>
+  import { mountCounter } from '../../scripts/islands/counterIsland.js';
+
+  const root = document.querySelector('[data-island="counter"]');
+  if (root) {
+    mountCounter(root);
+  }
+</script>

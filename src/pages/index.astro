@@ -1,8 +1,83 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = "Home Page";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import InteractiveCounter from '../components/islands/InteractiveCounter.astro';
+import IdleTipIsland from '../components/islands/IdleTipIsland.astro';
+import VisibleChartIsland from '../components/islands/VisibleChartIsland.astro';
+import MediaNoticeIsland from '../components/islands/MediaNoticeIsland.astro';
+import ClientOnlyTodoIsland from '../components/islands/ClientOnlyTodoIsland.astro';
+
+const pageTitle = 'Astro Client Directives + Components Lab';
+
+const componentConcepts = [
+  {
+    title: 'Frontmatter (server-only logic)',
+    description: 'Everything between --- --- runs on the server and is great for data prep, imports, and calculations.'
+  },
+  {
+    title: 'Template + expressions',
+    description: 'Use HTML-first templates with {curly braces} to render variables and map arrays.'
+  },
+  {
+    title: 'Props + slots + scoped styles',
+    description: 'Pass data with Astro.props, inject children via <slot />, and keep styles isolated per component.'
+  }
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<h2>My awesome blog subtitle</h2>
+  <section class="hero-block">
+    <h2>Static-first pages, interactive only where needed</h2>
+    <p>
+      Astro defaults to static HTML. In framework integrations, client directives (<code>client:*</code>) decide when
+      an island hydrates. This lab demonstrates the same hydration timing patterns with isolated Astro islands.
+    </p>
+  </section>
+
+  <section class="component-grid" aria-label="Astro component concepts">
+    {componentConcepts.map((item, index) => (
+      <FeatureCard
+        title={item.title}
+        description={item.description}
+        badge="Astro Component"
+        emphasize={index === 0}
+      >
+        <small>Reusable block #{index + 1}</small>
+      </FeatureCard>
+    ))}
+  </section>
+
+  <section class="directive-grid" aria-label="Client directives summary">
+    <FeatureCard title="client:load" description="Hydrates immediately on page load for high-priority UI." badge="Directive" />
+    <FeatureCard title="client:idle" description="Hydrates when browser is idle for low-priority interactions." badge="Directive" />
+    <FeatureCard title="client:visible" description="Hydrates once component enters viewport." badge="Directive" />
+    <FeatureCard title="client:media" description="Hydrates only when a CSS media query matches." badge="Directive" />
+    <FeatureCard title="client:only" description="Skips SSR and renders only on the client." badge="Directive" />
+  </section>
+
+  <section class="islands-grid" aria-label="Astro islands examples">
+    <InteractiveCounter />
+    <IdleTipIsland />
+    <VisibleChartIsland />
+    <MediaNoticeIsland />
+    <ClientOnlyTodoIsland />
+  </section>
+
+  <section class="concept-grid">
+    <FeatureCard
+      title="Performance benefit"
+      description="Ship mostly static HTML and hydrate only what is interactive to reduce JavaScript cost."
+      badge="Outcome"
+    />
+    <FeatureCard
+      title="SEO benefit"
+      description="Crawlers receive meaningful HTML content immediately, improving discoverability."
+      badge="Outcome"
+    />
+    <FeatureCard
+      title="Learning path"
+      description="Start with pure Astro components, then add islands and API routes incrementally."
+      badge="Outcome"
+    />
+  </section>
 </BaseLayout>

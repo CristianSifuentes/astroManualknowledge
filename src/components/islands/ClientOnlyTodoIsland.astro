@@ -1,0 +1,16 @@
+<section class="island-card" data-island="client-only">
+  <h3>Island 5 — Client-only UI (client:only mindset)</h3>
+  <p>This block renders mostly on the client, useful for purely interactive widgets.</p>
+  <div data-client-only-mount>
+    <em>Loading client-only widget…</em>
+  </div>
+</section>
+
+<script>
+  import { mountClientOnlyTodo } from '../../scripts/islands/clientOnlyTodoIsland.js';
+
+  const root = document.querySelector('[data-island="client-only"]');
+  if (root) {
+    mountClientOnlyTodo(root);
+  }
+</script>

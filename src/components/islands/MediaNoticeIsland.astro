@@ -1,0 +1,17 @@
+---
+const query = '(max-width: 900px)';
+---
+
+<section class="island-card" data-island="media-notice">
+  <h3>Island 4 — Media query hydration (client:media mindset)</h3>
+  <p data-media-status>Checking viewport condition…</p>
+</section>
+
+<script>
+  import { mountMediaNotice } from '../../scripts/islands/mediaNoticeIsland.js';
+
+  const root = document.querySelector('[data-island="media-notice"]');
+  if (root) {
+    mountMediaNotice(root, '(max-width: 900px)');
+  }
+</script>
