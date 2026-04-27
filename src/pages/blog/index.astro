@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Server-first rendering: data is loaded on the server at build/request time.
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout pageTitle="Content Collections Demo">
+  <h2>Content Collections (Markdown + schema)</h2>
+  <p>
+    This page reads structured markdown from <code>src/content/blog</code> and renders it with typed frontmatter.
+  </p>
+
+  <ul>
+    {sortedPosts.map((post) => (
+      <li>
+        <strong>{post.data.title}</strong> — {post.data.description}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
