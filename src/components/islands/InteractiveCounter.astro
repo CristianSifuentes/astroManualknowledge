@@ -1,0 +1,22 @@
+---
+// Astro Component concept: .astro files combine HTML + JS in one place.
+const islandId = 'counter-island';
+---
+
+<section class="counter-island" id={islandId}>
+  <p>Interactive island counter: <span data-count>0</span></p>
+  <button type="button" data-increment>Increment</button>
+</section>
+
+<script>
+  // Island Architecture concept: only this small section gets client JS.
+  const island = document.getElementById('counter-island');
+  const countLabel = island?.querySelector('[data-count]');
+  const incrementBtn = island?.querySelector('[data-increment]');
+
+  let count = 0;
+  incrementBtn?.addEventListener('click', () => {
+    count += 1;
+    if (countLabel) countLabel.textContent = String(count);
+  });
+</script>
