@@ -1,0 +1,18 @@
+<section class="island-card" data-island="idle-tip">
+  <h3>Island 2 — Hydrate on idle (client:idle mindset)</h3>
+  <p data-tip>Astro ships zero JavaScript by default.</p>
+  <button type="button" data-next-tip>Next tip</button>
+</section>
+
+<script>
+  import { mountIdleTip } from '../../scripts/islands/idleTipIsland.js';
+
+  const root = document.querySelector('[data-island="idle-tip"]');
+  if (!root) {
+    // no-op
+  } else if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(() => mountIdleTip(root));
+  } else {
+    setTimeout(() => mountIdleTip(root), 1);
+  }
+</script>

@@ -1,0 +1,28 @@
+<section class="island-card" data-island="visible-chart">
+  <h3>Island 3 — Hydrate when visible (client:visible mindset)</h3>
+  <p>Animation starts only when this island enters the viewport.</p>
+
+  <div class="chart" data-chart>
+    <div class="chart-row">
+      <span>Static HTML</span>
+      <div class="bar-track"><div class="bar" data-bar data-value="95"></div></div>
+    </div>
+    <div class="chart-row">
+      <span>Hydrated JS</span>
+      <div class="bar-track"><div class="bar" data-bar data-value="24"></div></div>
+    </div>
+    <div class="chart-row">
+      <span>SEO Readiness</span>
+      <div class="bar-track"><div class="bar" data-bar data-value="88"></div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { mountVisibleChart } from '../../scripts/islands/visibleChartIsland.js';
+
+  const root = document.querySelector('[data-island="visible-chart"]');
+  if (root) {
+    mountVisibleChart(root);
+  }
+</script>
