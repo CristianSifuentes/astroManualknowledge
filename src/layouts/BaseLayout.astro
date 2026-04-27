@@ -3,8 +3,19 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-// Astro component props are read from Astro.props.
 const { pageTitle = 'Astro Demo' } = Astro.props;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog Collection' },
+  { href: '/api/time.json', label: 'API Demo' }
+];
+
+const footerLinks = [
+  { href: '/', label: 'Concept Playground' },
+  { href: '/blog', label: 'Markdown Content' },
+  { href: '/api/time.json', label: 'Time Endpoint' }
+];
 ---
 
 <html lang="en">
@@ -17,12 +28,18 @@ const { pageTitle = 'Astro Demo' } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Header title="My web portfolio" />
-    <h1>{pageTitle}</h1>
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <div class="page-shell">
+      <Header siteTitle={pageTitle} tagline="Performance-focused websites with Astro" navItems={navItems} />
+
+      <main class="page-main">
+        <section class="content-card">
+          <slot />
+        </section>
+      </main>
+
+      <Footer author="Dedi Kusniadi learning adaptation" links={footerLinks} />
+    </div>
+
     <script>
       import '../scripts/menu.js';
     </script>
