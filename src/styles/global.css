@@ -100,6 +100,18 @@ a:hover { text-decoration: underline; }
 .hero-block h2 { margin-top: 0; }
 .hero-block p { margin-bottom: 0; color: var(--muted); }
 
+
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+small {
+  color: #64748b;
+}
+
 .islands-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

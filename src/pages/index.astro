@@ -1,19 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FeatureCard from '../components/FeatureCard.astro';
 import InteractiveCounter from '../components/islands/InteractiveCounter.astro';
 import IdleTipIsland from '../components/islands/IdleTipIsland.astro';
 import VisibleChartIsland from '../components/islands/VisibleChartIsland.astro';
 
-const pageTitle = 'Astro Islands Architecture Lab';
+const pageTitle = 'Astro Components + Islands Lab';
+
+const componentConcepts = [
+  {
+    title: 'Frontmatter (server-only logic)',
+    description: 'Everything between --- --- runs on the server and is great for data prep, imports, and calculations.'
+  },
+  {
+    title: 'Template + expressions',
+    description: 'Use HTML-first templates with {curly braces} to render variables and map arrays.'
+  },
+  {
+    title: 'Props + slots + scoped styles',
+    description: 'Pass data with Astro.props, inject children via <slot />, and keep styles isolated per component.'
+  }
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <section class="hero-block">
-    <h2>Sea of static HTML + selective hydration</h2>
+    <h2>Build content-first pages with reusable Astro components</h2>
     <p>
-      Astro renders this page as static HTML first. Only the three components below receive JavaScript, each with
-      a different hydration strategy. If one island fails, the rest of the page remains stable.
+      This page demonstrates two pillars of Astro: reusable <code>.astro</code> components (zero JavaScript by default)
+      and isolated interactive islands hydrated only when needed.
     </p>
+  </section>
+
+  <section class="component-grid" aria-label="Astro component concepts">
+    {componentConcepts.map((item, index) => (
+      <FeatureCard
+        title={item.title}
+        description={item.description}
+        badge="Astro Component"
+        emphasize={index === 0}
+      >
+        <small>Reusable block #{index + 1}</small>
+      </FeatureCard>
+    ))}
   </section>
 
   <section class="islands-grid" aria-label="Astro islands examples">
@@ -23,21 +52,20 @@ const pageTitle = 'Astro Islands Architecture Lab';
   </section>
 
   <section class="concept-grid">
-    <article>
-      <h3>Why it matters</h3>
-      <ul>
-        <li>Faster time-to-interactive by shipping less JS.</li>
-        <li>Better SEO from meaningful HTML at first paint.</li>
-        <li>Independent islands improve reliability and maintainability.</li>
-      </ul>
-    </article>
-    <article>
-      <h3>Astro features in this project</h3>
-      <ul>
-        <li><a href="/blog">Content Collections demo</a> with typed markdown schema.</li>
-        <li><a href="/api/time.json">API endpoint demo</a> for server-side routes.</li>
-        <li>Reusable layout components with dynamic props.</li>
-      </ul>
-    </article>
+    <FeatureCard
+      title="Performance benefit"
+      description="Ship mostly static HTML and hydrate only what is interactive to reduce JavaScript cost."
+      badge="Outcome"
+    />
+    <FeatureCard
+      title="SEO benefit"
+      description="Crawlers receive meaningful HTML content immediately, improving discoverability."
+      badge="Outcome"
+    />
+    <FeatureCard
+      title="Learning path"
+      description="Start with pure Astro components, then add islands and API routes incrementally."
+      badge="Outcome"
+    />
   </section>
 </BaseLayout>
