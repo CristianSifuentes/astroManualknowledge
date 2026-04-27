@@ -1,1 +1,27 @@
-<h1>Header</h1>
+---
+const {
+  siteTitle = 'Astro Manual Knowledge',
+  tagline = 'Learn Astro through practical examples',
+  navItems = []
+} = Astro.props;
+---
+
+<header class="site-header">
+  <div class="header-content">
+    <div class="brand-block">
+      <p class="brand-eyebrow">Astro Learning Hub</p>
+      <h1>{siteTitle}</h1>
+      <p>{tagline}</p>
+    </div>
+
+    <nav aria-label="Main navigation" class="main-nav">
+      <ul>
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
