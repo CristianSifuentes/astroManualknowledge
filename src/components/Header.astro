@@ -16,7 +16,7 @@ const {
 
     <nav aria-label="Main navigation" class="main-nav">
       <ul>
-        {navItems.map((item) => (
+        {navItems.map((item: { href: string | URL | null | undefined; label: unknown; }) => (
           <li>
             <a href={item.href}>{item.label}</a>
           </li>

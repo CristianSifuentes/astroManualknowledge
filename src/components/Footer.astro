@@ -18,7 +18,7 @@ const {
     <div>
       <h2>Quick links</h2>
       <ul>
-        {links.map((item) => (
+        {links.map((item: { href: string | URL | null | undefined; label: unknown; }) => (
           <li><a href={item.href}>{item.label}</a></li>
         ))}
       </ul>
