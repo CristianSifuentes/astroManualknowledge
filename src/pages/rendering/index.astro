@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+
+export const prerender = true;
+
+const buildTime = new Date().toISOString();
+---
+
+<BaseLayout pageTitle="Rendering Strategy Lab (SSG + SSR Concepts)">
+  <section class="hero-block">
+    <h2>Astro rendering in 2026 (Astro v6 behavior)</h2>
+    <p>
+      Astro v6 removed <code>output: 'hybrid'</code>. The default static output now behaves similarly for mixed projects,
+      while SSR is enabled per route with adapters and <code>prerender = false</code>.
+    </p>
+  </section>
+
+  <section class="component-grid">
+    <FeatureCard
+      title="SSG Example (this page)"
+      description="This page uses export const prerender = true, so HTML is generated at build time."
+      badge="SSG"
+      emphasize={true}
+    >
+      <small>Build timestamp: {buildTime}</small>
+    </FeatureCard>
+
+    <FeatureCard
+      title="SSR Example (concept)"
+      description="For per-request rendering, add an SSR adapter and set export const prerender = false on a route."
+      badge="SSR"
+    >
+      <small>Adapter required (e.g., Node, Vercel, Netlify).</small>
+    </FeatureCard>
+
+    <FeatureCard
+      title="Hybrid mindset"
+      description="Keep marketing/docs pages static and make only dynamic routes server-rendered."
+      badge="Best Practice"
+    />
+  </section>
+
+  <section class="island-card" data-build-vs-runtime>
+    <h3>Build-time vs runtime data</h3>
+    <p><strong>Build time (SSG):</strong> {buildTime}</p>
+    <p><strong>Runtime API time:</strong> <span data-runtime-time>Not loaded yet</span></p>
+    <button type="button" data-load-runtime>Load runtime time from /api/time.json</button>
+  </section>
+
+  <pre class="code-block">{`---
+// SSR route example (requires adapter)
+export const prerender = false;
+---`}</pre>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector('[data-build-vs-runtime]');
+  const output = root?.querySelector('[data-runtime-time]');
+  const button = root?.querySelector('[data-load-runtime]');
+
+  button?.addEventListener('click', async () => {
+    const response = await fetch('/api/time.json');
+    const data = await response.json();
+    if (output) output.textContent = data.now;
+  });
+</script>
