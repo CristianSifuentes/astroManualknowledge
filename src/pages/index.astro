@@ -1,29 +1,43 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import InteractiveCounter from '../components/islands/InteractiveCounter.astro';
+import IdleTipIsland from '../components/islands/IdleTipIsland.astro';
+import VisibleChartIsland from '../components/islands/VisibleChartIsland.astro';
 
-const pageTitle = 'Astro Concepts Playground';
+const pageTitle = 'Astro Islands Architecture Lab';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h2>Astro in practice</h2>
-  <p>
-    This page is mostly static HTML (fast by default). The counter below is an isolated interactive section,
-    demonstrating Astro's island mindset: add JavaScript only where needed.
-  </p>
+  <section class="hero-block">
+    <h2>Sea of static HTML + selective hydration</h2>
+    <p>
+      Astro renders this page as static HTML first. Only the three components below receive JavaScript, each with
+      a different hydration strategy. If one island fails, the rest of the page remains stable.
+    </p>
+  </section>
 
-  <InteractiveCounter />
+  <section class="islands-grid" aria-label="Astro islands examples">
+    <InteractiveCounter />
+    <IdleTipIsland />
+    <VisibleChartIsland />
+  </section>
 
-  <h3>Client directives (concept preview)</h3>
-  <p>
-    In production apps, directives like <code>client:load</code>, <code>client:idle</code>, and
-    <code>client:visible</code> are used with framework components (React/Vue/Svelte) to control hydration timing.
-  </p>
-
-  <pre>{`<!-- Example usage with a framework component -->
-<MyReactWidget client:visible />`}</pre>
-
-  <p>
-    Explore the <a href="/blog">Content Collections demo</a> and the <a href="/api/time.json">API endpoint</a>.
-  </p>
+  <section class="concept-grid">
+    <article>
+      <h3>Why it matters</h3>
+      <ul>
+        <li>Faster time-to-interactive by shipping less JS.</li>
+        <li>Better SEO from meaningful HTML at first paint.</li>
+        <li>Independent islands improve reliability and maintainability.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Astro features in this project</h3>
+      <ul>
+        <li><a href="/blog">Content Collections demo</a> with typed markdown schema.</li>
+        <li><a href="/api/time.json">API endpoint demo</a> for server-side routes.</li>
+        <li>Reusable layout components with dynamic props.</li>
+      </ul>
+    </article>
+  </section>
 </BaseLayout>
