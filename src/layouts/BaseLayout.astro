@@ -2,35 +2,46 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import Card from '../components/Card.astro';
-const pageTitle = Astro.props;
-/*  Props are attributes that we pass to a component to make it reusable. */
+
+const { pageTitle = 'Astro Demo' } = Astro.props;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog Collection' },
+  { href: '/api/time.json', label: 'API Demo' }
+];
+
+const footerLinks = [
+  { href: '/', label: 'Concept Playground' },
+  { href: '/blog', label: 'Markdown Content' },
+  { href: '/api/time.json', label: 'Time Endpoint' }
+];
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
-	</head>
-	<body>
-        <Header title="My web portfolio"/>
-        <h1>{pageTitle}</h1>
-        <main>
-            <slot/>
-        </main>
-        <Card title="New 1" content="New content 1"></Card>
-        <Card title="New 2" content="New content 2"></Card>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header siteTitle={pageTitle} tagline="Performance-focused websites with Astro" navItems={navItems} />
 
-        <Footer></Footer>
-        <script>
-            import "../scripts/menu.js"
-        </script>
-        
+      <main class="page-main">
+        <section class="content-card">
+          <slot />
+        </section>
+      </main>
 
-		
-	</body>
+      <Footer author="Dedi Kusniadi learning adaptation" links={footerLinks} />
+    </div>
+
+    <script>
+      import '../scripts/menu.js';
+    </script>
+  </body>
 </html>

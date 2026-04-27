@@ -1,0 +1,33 @@
+---
+const {
+  author = 'Astro Manual Knowledge',
+  year = new Date().getFullYear(),
+  links = []
+} = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <h2>About this project</h2>
+      <p>
+        A practical Astro playground for islands, content collections, and API routes.
+      </p>
+    </div>
+
+    <div>
+      <h2>Quick links</h2>
+      <ul>
+        {links.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h2>Credits</h2>
+      <p>Built by {author}</p>
+      <p>&copy; {year}</p>
+    </div>
+  </div>
+</footer>
