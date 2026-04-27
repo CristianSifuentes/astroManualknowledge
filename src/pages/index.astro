@@ -4,8 +4,10 @@ import FeatureCard from '../components/FeatureCard.astro';
 import InteractiveCounter from '../components/islands/InteractiveCounter.astro';
 import IdleTipIsland from '../components/islands/IdleTipIsland.astro';
 import VisibleChartIsland from '../components/islands/VisibleChartIsland.astro';
+import MediaNoticeIsland from '../components/islands/MediaNoticeIsland.astro';
+import ClientOnlyTodoIsland from '../components/islands/ClientOnlyTodoIsland.astro';
 
-const pageTitle = 'Astro Components + Islands Lab';
+const pageTitle = 'Astro Client Directives + Components Lab';
 
 const componentConcepts = [
   {
@@ -25,10 +27,10 @@ const componentConcepts = [
 
 <BaseLayout pageTitle={pageTitle}>
   <section class="hero-block">
-    <h2>Build content-first pages with reusable Astro components</h2>
+    <h2>Static-first pages, interactive only where needed</h2>
     <p>
-      This page demonstrates two pillars of Astro: reusable <code>.astro</code> components (zero JavaScript by default)
-      and isolated interactive islands hydrated only when needed.
+      Astro defaults to static HTML. In framework integrations, client directives (<code>client:*</code>) decide when
+      an island hydrates. This lab demonstrates the same hydration timing patterns with isolated Astro islands.
     </p>
   </section>
 
@@ -45,10 +47,20 @@ const componentConcepts = [
     ))}
   </section>
 
+  <section class="directive-grid" aria-label="Client directives summary">
+    <FeatureCard title="client:load" description="Hydrates immediately on page load for high-priority UI." badge="Directive" />
+    <FeatureCard title="client:idle" description="Hydrates when browser is idle for low-priority interactions." badge="Directive" />
+    <FeatureCard title="client:visible" description="Hydrates once component enters viewport." badge="Directive" />
+    <FeatureCard title="client:media" description="Hydrates only when a CSS media query matches." badge="Directive" />
+    <FeatureCard title="client:only" description="Skips SSR and renders only on the client." badge="Directive" />
+  </section>
+
   <section class="islands-grid" aria-label="Astro islands examples">
     <InteractiveCounter />
     <IdleTipIsland />
     <VisibleChartIsland />
+    <MediaNoticeIsland />
+    <ClientOnlyTodoIsland />
   </section>
 
   <section class="concept-grid">

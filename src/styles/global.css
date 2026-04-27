@@ -112,6 +112,38 @@ small {
   color: #64748b;
 }
 
+
+.directive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.todo-label {
+  font-size: 0.86rem;
+  color: #334155;
+}
+
+.todo-row {
+  margin-top: 0.3rem;
+  display: flex;
+  gap: 0.45rem;
+}
+
+.todo-row input {
+  flex: 1;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.45rem;
+  padding: 0.35rem 0.5rem;
+}
+
+[data-list] {
+  margin: 0.6rem 0 0;
+  padding-left: 1rem;
+  color: #475569;
+}
+
 .islands-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
