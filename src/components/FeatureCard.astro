@@ -1,0 +1,62 @@
+---
+// 1) Frontmatter runs on the server only.
+// This logic is not shipped to the browser unless we add client-side scripts.
+const {
+  title,
+  description,
+  badge = 'Astro Component',
+  emphasize = false
+} = Astro.props;
+
+const toneClass = emphasize ? 'feature-card feature-card--emphasize' : 'feature-card';
+---
+
+<!-- 2) Template section (HTML + expressions) -->
+<article class={toneClass}>
+  <p class="feature-card__badge">{badge}</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <div class="feature-card__slot">
+    <slot />
+  </div>
+</article>
+
+<style>
+  /* 3) Scoped component style (applies only to this component). */
+  .feature-card {
+    border: 1px solid #dbe3ef;
+    border-radius: 0.8rem;
+    background: #fff;
+    padding: 1rem;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .feature-card--emphasize {
+    border-color: #93c5fd;
+    background: linear-gradient(180deg, #ffffff, #eff6ff);
+  }
+
+  .feature-card__badge {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #1d4ed8;
+    font-weight: 700;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.02rem;
+  }
+
+  p {
+    margin: 0;
+    color: #475569;
+  }
+
+  .feature-card__slot {
+    margin-top: 0.25rem;
+  }
+</style>

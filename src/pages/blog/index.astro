@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+export const prerender = true;
+---
+
+<BaseLayout pageTitle="Content Collections Demo">
+  <h2>Typed Markdown loaded in Astro frontmatter</h2>
+  <p>
+    This route uses <code>getCollection('blog')</code> in frontmatter and renders static HTML for each post card.
+  </p>
+
+  <section class="component-grid">
+    {sortedPosts.map((post) => (
+      <FeatureCard
+        title={post.data.title}
+        description={post.data.description}
+        badge={post.data.pubDate.toISOString().split('T')[0]}
+      >
+        <small>Tags: {post.data.tags.join(', ')}</small>
+      </FeatureCard>
+    ))}
+  </section>
+</BaseLayout>
