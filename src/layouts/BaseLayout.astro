@@ -2,35 +2,29 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import Card from '../components/Card.astro';
-const pageTitle = Astro.props;
-/*  Props are attributes that we pass to a component to make it reusable. */
+
+// Astro component props are read from Astro.props.
+const { pageTitle = 'Astro Demo' } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
-	</head>
-	<body>
-        <Header title="My web portfolio"/>
-        <h1>{pageTitle}</h1>
-        <main>
-            <slot/>
-        </main>
-        <Card title="New 1" content="New content 1"></Card>
-        <Card title="New 2" content="New content 2"></Card>
-
-        <Footer></Footer>
-        <script>
-            import "../scripts/menu.js"
-        </script>
-        
-
-		
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header title="My web portfolio" />
+    <h1>{pageTitle}</h1>
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/menu.js';
+    </script>
+  </body>
 </html>
